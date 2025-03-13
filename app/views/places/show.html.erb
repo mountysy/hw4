@@ -7,12 +7,17 @@
   <p><%= entry["description"] %></p>
 <% end %>
 
+<% if entry.uploaded_image.attached? %>
+  <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid">
+<% end %>
+
+
 <% if session["user_id"] != nil %>
     <p>
       <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
     </p>
 <% else %>
-    <p> Please log in to add entry </p>
+    <p> Please log in to add entries </p>
 <% end %>
 
 <p>
