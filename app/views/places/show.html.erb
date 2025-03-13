@@ -1,25 +1,35 @@
-<h1><%= @place["name"] %></h1>
+<div class = "container">
+  <div class="row">
+    <div class = "pt-3 pb-3">
+       <h1><%= @place["name"] %> - My Entries </h1>
+    </div>
+    
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
+    <% for entry in @entries %>
+      <div class="col-sm-6 col-md-4">
+        <h5><%= entry["title"] %></h5>
+        <h6><%= entry["occurred_on"] %></h6>
+        <p><%= entry["description"] %></p>
 
-<% if entry.uploaded_image.attached? %>
-  <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid">
-<% end %>
+          <% if entry.uploaded_image.attached? %>
+            <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid" style="width: 400px; height: 400px; object-fit: cover;" alt="Standardized Image">
+          <% end %>
+      </div>
+    <% end %>
 
 
-<% if session["user_id"] != nil %>
+
+    <% if session["user_id"] != nil %>
+        <p>
+          <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-success" >New Entry</a>
+        </p>
+    <% else %>
+        <p> Please log in to add entries </p>
+    <% end %>
+
     <p>
-      <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
+      <a href="/places">Back to All Places</a>
     </p>
-<% else %>
-    <p> Please log in to add entries </p>
-<% end %>
 
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
+  </div>
+</div>
