@@ -18,11 +18,10 @@
     <% end %>
 
 
-
     <% if session["user_id"] != nil %>
-        <p>
+        <div class = "mt-3 mb-3">
           <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-success" >New Entry</a>
-        </p>
+        </div>
     <% else %>
         <p> Please log in to add entries </p>
     <% end %>
